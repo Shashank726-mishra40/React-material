@@ -18,6 +18,7 @@ UserContext mein user save
 
 Ab Login mein:
 const { setUser } = useContext(UserContext)
+const [count,setCount] = useState(0)
 
 Hum sirf setUser le rahe hain kyunki Login component ka kaam hai:
 User se username/password lena → Context mein user ko save karna.

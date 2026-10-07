@@ -1,0 +1,90 @@
+ Context create karna
+const ThemeContext = createContext({
+    theme: "light",
+    darkTheme: () => {},
+    lightTheme: () => {}
+})
+
+Yahan ThemeContext create ho raha hai.
+Default value ek object hai:
+ThemeContext
+     ↓
+{
+   theme: "light",
+   darkTheme: function,
+   lightTheme: function
+}
+
+Iska matlab initially hum define kar rahe hain:
+- theme → "light"
+- darkTheme → dark mode karne wala function
+- lightTheme → light mode karne wala function
+Note: () => {} abhi empty function hai. Ye actual dark/light logic nahi hai.
+
+
+3. Provider export karna
+export const themeContextProvider = ThemeContext.Provider
+
+Normally hum likhte:
+<ThemeContext.Provider>
+
+Lekin yahan usko ek short/custom naam de diya:
+ThemeContext.Provider
+        ↓
+themeContextProvider
+
+Ab doosri file mein:
+<themeContextProvider>
+   ...
+</themeContextProvider>
+
+Lekin ek important correction: React components ka naam capital letter se start hona chahiye. Isliye better:
+
+
+
+export default function useTheme(){
+    return useContext(ThemeContext)
+}
+
+Ye bahut useful part hai.
+Normally kisi component mein:
+const { theme, darkTheme, lightTheme } = useContext(ThemeContext)
+
+likhna padta.
+Tumne usko simple bana diya:
+const { theme, darkTheme, lightTheme } = useTheme()
+
+Because:
+useTheme()
+   ↓
+useContext(ThemeContext)
+   ↓
+ThemeContext ka data
+   ↓
+{
+  theme,
+  darkTheme,
+  lightTheme
+}
+
+Complete flow
+              ThemeContext
+                   │
+                   │
+          { theme, darkTheme,
+            lightTheme }
+                   │
+                   ▼
+        ThemeContextProvider
+                   │
+                   ▼
+          Child Components
+                   │
+                   ▼
+              useTheme()
+                   │
+                   ▼
+          useContext(ThemeContext)
+                   │
+                   ▼
+       theme / darkTheme / lightTheme
