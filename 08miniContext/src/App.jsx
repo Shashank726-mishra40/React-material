@@ -1,0 +1,20 @@
+import { useState } from 'react'
+import UserContextProvider from './context/UserContextProvider'
+import './App.css'
+import UserContext from './context/UserContext'
+import Login from './Components/login'
+import Profile from './Components/Profile'
+
+
+function App() {
+ 
+
+  return (
+    <UserContextProvider>
+      <Login />
+      <Profile />
+    </UserContextProvider>
+  )
+}
+
+export default App

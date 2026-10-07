@@ -1,0 +1,57 @@
+Username input
+      ↓
+username state
+
+Password input
+      ↓
+password state
+
+Submit button
+      ↓
+setUser()
+      ↓
+UserContext mein user save
+
+
+
+
+
+Ab Login mein:
+const { setUser } = useContext(UserContext)
+
+Hum sirf setUser le rahe hain kyunki Login component ka kaam hai:
+User se username/password lena → Context mein user ko save karna.
+
+Login ko user ki zarurat nahi hai
+Login mein hum ye nahi kar rahe:
+
+
+
+
+
+
+
+
+
+
+useContext(UserContext)
+
+React se bol raha hai:
+"Mujhe UserContext ki value do."
+
+Suppose Provider mein tumne ye diya hai:
+<UserContext.Provider value={{user, setUser}}>
+
+To useContext(UserContext) hume ye object dega:
+{
+    user,
+    setUser
+}
+
+
+
+
+
+Why?
+Login user ko read/display nahi kar raha.
+Login ka kaam sirf user data ko Context mein save karna hai.

@@ -1,0 +1,127 @@
+// "React, mere liye ek Context object bana do jisme main user-related data 
+// ko components ke beech share kar sakun."
+
+// For Example:-
+{/* <UserContext>
+    <Login></Login>
+    <Cards></Cards>
+    </UserContext> */}
+
+
+UserContextProvider = Iss variable ke andar hum ek React component function store karenge.
+
+Iska purpose hoga:
+User ki information ko multiple components ke saath share karna.
+
+
+
+children React ka special prop hai.
+Suppose hum Provider ko aise use karte hain:
+<UserContextProvider>
+    <Navbar />
+    <Profile />
+    <Home />
+</UserContextProvider>
+
+To Provider ke andar jo bhi likha hai:
+<Navbar />
+<Profile />
+<Home />
+
+ye sab children ke andar aa jayega.
+
+
+
+const [user, setUser] = useState(null);
+
+null initial value hai.
+Matlab starting mein:
+user = null
+
+<UserContext.Provider>
+
+ka job hai:
+"Main apne andar ke components ko Context ki value provide karunga."
+
+
+
+
+Ye sabse important part hai:
+value={{ user, setUser }}
+
+Yahan hum Provider ko data de rahe hain.
+Dhyan do:
+value={{
+    user,
+    setUser
+}}
+
+Ye actually ek JavaScript object hai.
+Equivalent:
+value={{
+    user: user,
+    setUser: setUser
+}}
+
+So Context ke through hum dono cheezein share kar rahe hain:
+user
++
+setUser
+
+
+
+Why setUser bhi share kar rahe hain ????????????
+
+Suppose Profile component mein user ko update karna hai.
+Agar sirf:
+value={{ user }}
+
+bhejte:
+to child user ko read kar sakta tha.
+But:
+value={{ user, setUser }}
+
+se child:
+setUser(...)
+
+bhi kar sakta hai.
+Example:
+const { user, setUser } = useContext(UserContext);
+
+Then:
+setUser("Rahul");
+
+Context ki state update ho jayegi.
+
+
+
+
+
+
+
+
+
+
+                  UserContext
+                       │
+                       ↓
+              UserContextProvider
+                       │
+              ┌────────┴────────┐
+              │                 │
+            user             setUser
+              │                 │
+              └────────┬────────┘
+                       │
+                    children
+                       │
+             ┌─────────┼─────────┐
+             ↓         ↓         ↓
+           Navbar    Profile     Home
+
+
+
+           UserContext.Provider bolta hai:
+"Mere andar jitne components hain, unko ye data available hai."
+
+Ye lo current user bhi, aur user ko change karne ka function bhi."
